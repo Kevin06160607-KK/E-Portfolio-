@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Portfolio | Sri Harshini K - Web Security</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #070b19;
+            --bg-card: rgba(16, 25, 53, 0.7);
+            --primary-neon: #00f2fe;
+            --secondary-neon: #4facfe;
+            --accent-purple: #b224ef;
+            --text-light: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(0, 242, 254, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(178, 36, 239, 0.08) 0%, transparent 40%);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Cyber Grid Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0, 242, 254, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0, 242, 254, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(7, 11, 25, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-glow);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary-neon), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-neon);
+            text-shadow: 0 0 8px var(--primary-neon);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 7rem 5% 4rem;
+            text-align: center;
+        }
+
+        .hero-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 3.5rem 2.5rem;
+            max-width: 850px;
+            width: 100%;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 0 40px rgba(0, 242, 254, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(0, 242, 254, 0.12);
+            border: 1px solid var(--primary-neon);
+            color: var(--primary-neon);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--primary-neon), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+
+        .meta-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: 12px;
+            border-left: 3px solid var(--primary-neon);
+        }
+
+        .meta-item span {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .meta-item strong {
+            font-size: 0.95rem;
+            color: #fff;
+        }
+
+        /* Section Global */
+        section {
+            padding: 5rem 8%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #fff;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            bottom: 0;
+            left: 20%;
+            background: linear-gradient(90deg, var(--primary-neon), var(--accent-purple));
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* Cards Grid */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .cyber-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-neon);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.15);
+        }
+
+        .card-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid var(--primary-neon);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary-neon);
+            margin-bottom: 1.2rem;
+        }
+
+        .cyber-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.8rem;
+            color: #fff;
+        }
+
+        .cyber-card p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.7rem;
+            background: rgba(178, 36, 239, 0.15);
+            border: 1px solid rgba(178, 36, 239, 0.4);
+            color: #e9d5ff;
+            border-radius: 6px;
+        }
+
+        /* Threats Table */
+        .table-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 1.1rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--primary-neon);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            font-size: 0.92rem;
+            color: var(--text-light);
+        }
+
+        tr:hover {
+            background: rgba(0, 242, 254, 0.04);
+        }
+
+        .severity-high {
+            color: #ff4d4d;
+            font-weight: 600;
+        }
+
+        /* Architecture Flow */
+        .flow-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-glow);
+            text-align: center;
+        }
+
+        .flow-step {
+            flex: 1;
+            min-width: 170px;
+            padding: 1.2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 242, 254, 0.2);
+        }
+
+        .flow-step i {
+            font-size: 2rem;
+            color: var(--primary-neon);
+            margin-bottom: 0.7rem;
+        }
+
+        .flow-step h4 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .flow-step p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .flow-arrow {
+            color: var(--accent-purple);
+            font-size: 1.5rem;
+        }
+
+        /* Reflection & Learning */
+        .reflection-box {
+            background: linear-gradient(135deg, rgba(16, 25, 53, 0.9), rgba(42, 16, 65, 0.7));
+            border: 1px solid var(--accent-purple);
+            border-radius: 16px;
+            padding: 2.5rem;
+        }
+
+        .reflection-box h3 {
+            color: var(--primary-neon);
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2.5rem 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer strong {
+            color: var(--primary-neon);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+            .flow-arrow { transform: rotate(90deg); width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo"><i class="fa-solid fa-shield-halved"></i> CYBER.PORTFOLIO</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#pillars">Core Pillars</a></li>
+            <li><a href="#crypto">Web Crypto</a></li>
+            <li><a href="#vulnerabilities">Threats & Defense</a></li>
+            <li><a href="#reflection">Reflection</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero / Student Info -->
+    <header class="hero" id="home">
+        <div class="hero-card">
+            <span class="badge"><i class="fa-solid fa-lock"></i> Academic E-Portfolio Activity</span>
+            <h1>SRI HARSHINI K</h1>
+            <h2>Web Security & Cryptographic Protocols</h2>
+            <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto;">
+                An interactive digital portfolio exploring modern web security architectures, cryptographic defense mechanisms, HTTPS/TLS handshakes, and mitigation strategies against OWASP web vulnerabilities.
+            </p>
+
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <span>Student Name</span>
+                    <strong>Sri Harshini K</strong>
+                </div>
+                <div class="meta-item">
+                    <span>Subject</span>
+                    <strong>Cryptography & Cyber Security</strong>
+                </div>
+                <div class="meta-item">
+                    <span>Core Topic</span>
+                    <strong>Web Security</strong>
+                </div>
+                <div class="meta-item">
+                    <span>Activity Type</span>
+                    <strong>E-Portfolio Creation</strong>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section 1: Core Pillars of Web Security -->
+    <section id="pillars">
+        <div class="section-title">
+            <h2>1. Core Pillars of Web Security</h2>
+            <p>Ensuring the CIA Triad (Confidentiality, Integrity, and Availability) across web applications</p>
+        </div>
+
+        <div class="grid-3">
+            <div class="cyber-card">
+                <div class="card-icon"><i class="fa-solid fa-user-secret"></i></div>
+                <h3>Confidentiality</h3>
+                <p>Protecting sensitive user data (credentials, tokens, personal info) from unauthorized interception during transit and storage using strong encryption algorithms.</p>
+                <div class="tag-list">
+                    <span class="tag">AES-256</span>
+                    <span class="tag">TLS 1.3</span>
+                    <span class="tag">Data Privacy</span>
+                </div>
+            </div>
+
+            <div class="cyber-card">
+                <div class="card-icon"><i class="fa-solid fa-file-shield"></i></div>
+                <h3>Integrity</h3>
+                <p>Ensuring that HTTP requests, responses, and database records are not tampered with or altered by Man-in-the-Middle (MitM) attackers during transmission.</p>
+                <div class="tag-list">
+                    <span class="tag">SHA-256</span>
+                    <span class="tag">HMAC</span>
+                    <span class="tag">Digital Signatures</span>
+                </div>
+            </div>
+
+            <div class="cyber-card">
+                <div class="card-icon"><i class="fa-solid fa-fingerprint"></i></div>
+                <h3>Authentication & Access</h3>
+                <p>Verifying user and server identities reliably before granting access to protected web resources and APIs using multi-layered verification.</p>
+                <div class="tag-list">
+                    <span class="tag">OAuth 2.0</span>
+                    <span class="tag">JWT</span>
+                    <span class="tag">MFA / 2FA</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Cryptography in Web Security (SSL/TLS Flow) -->
+    <section id="crypto">
+        <div class="section-title">
+            <h2>2. Cryptography in Web Security (HTTPS / TLS)</h2>
+            <p>How Public Key Infrastructure (PKI) and Hybrid Encryption secure browser-to-server communication</p>
+        </div>
+
+        <div class="flow-box">
+            <div class="flow-step">
+                <i class="fa-solid fa-laptop-code"></i>
+                <h4>1. Client Hello</h4>
+                <p>Browser sends supported TLS version & cipher suites to the web server.</p>
+            </div>
+            <div class="flow-arrow"><i class="fa-solid fa-angles-right"></i></div>
+            <div class="flow-step">
+                <i class="fa-solid fa-certificate"></i>
+                <h4>2. SSL Certificate</h4>
+                <p>Server responds with its CA-signed Digital Certificate & Public Key.</p>
+            </div>
+            <div class="flow-arrow"><i class="fa-solid fa-angles-right"></i></div>
+            <div class="flow-step">
+                <i class="fa-solid fa-key"></i>
+                <h4>3. Key Exchange</h4>
+                <p>Asymmetric crypto (ECDHE/RSA) establishes a shared symmetric session key.</p>
+            </div>
+            <div class="flow-arrow"><i class="fa-solid fa-angles-right"></i></div>
+            <div class="flow-step">
+                <i class="fa-solid fa-lock"></i>
+                <h4>4. Secure Tunnel</h4>
+                <p>All HTTP traffic is encrypted using fast Symmetric AES-GCM cipher.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Web Vulnerabilities & Defense Matrix -->
+    <section id="vulnerabilities">
+        <div class="section-title">
+            <h2>3. Major Web Threats & Countermeasures</h2>
+            <p>Analysis of critical OWASP Web Security vulnerabilities and cryptographic/architectural defenses</p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Web Attack / Threat</th>
+                        <th>Severity</th>
+                        <th>Attack Mechanism</th>
+                        <th>Defense & Mitigation Strategy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>SQL Injection (SQLi)</strong></td>
+                        <td><span class="severity-high">Critical</span></td>
+                        <td>Injecting malicious SQL queries via unvalidated user input fields to bypass authentication or dump databases.</td>
+                        <td>Prepared Statements (Parameterized Queries), Input Validation, and Web Application Firewalls (WAF).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cross-Site Scripting (XSS)</strong></td>
+                        <td><span class="severity-high">High</span></td>
+                        <td>Injecting malicious client-side scripts into web pages viewed by other users to steal session cookies.</td>
+                        <td>Context-aware Output Encoding, Content Security Policy (CSP) headers, and <code>HttpOnly</code> cookie flags.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cross-Site Request Forgery (CSRF)</strong></td>
+                        <td><span class="severity-high">High</span></td>
+                        <td>Tricking an authenticated user's browser into executing unwanted actions on a trusted site.</td>
+                        <td>Anti-CSRF Cryptographic Tokens, <code>SameSite=Strict</code> cookie attributes, and Re-authentication.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Man-in-the-Middle (MitM)</strong></td>
+                        <td><span class="severity-high">Critical</span></td>
+                        <td>Intercepting or altering unencrypted HTTP traffic between client and server on public networks.</td>
+                        <td>Enforcing HTTPS via HSTS (HTTP Strict Transport Security), TLS 1.3, and Certificate Pinning.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Broken Authentication</strong></td>
+                        <td><span class="severity-high">Critical</span></td>
+                        <td>Compromising passwords, keys, or session tokens due to weak hashing or credential stuffing.</td>
+                        <td>Salted Password Hashing (Argon2 / bcrypt), Multi-Factor Authentication (MFA), and short-lived JWTs.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Section 4: Security Headers & Best Practices -->
+    <section>
+        <div class="section-title">
+            <h2>4. Essential HTTP Security Headers</h2>
+            <p>Browser-level directives implemented in modern secure web servers</p>
+        </div>
+
+        <div class="grid-3">
+            <div class="cyber-card">
+                <h3><i class="fa-solid fa-code" style="color:var(--primary-neon); margin-right:8px;"></i> Content-Security-Policy</h3>
+                <p>Restricts the sources from which scripts, styles, and images can be loaded, effectively neutralizing XSS and data injection attacks.</p>
+                <div class="tag-list"><span class="tag">Header: CSP</span></div>
+            </div>
+
+            <div class="cyber-card">
+                <h3><i class="fa-solid fa-bolt" style="color:var(--primary-neon); margin-right:8px;"></i> Strict-Transport-Security</h3>
+                <p>Forces web browsers to interact with the server exclusively over HTTPS connections, preventing protocol downgrade and SSL stripping attacks.</p>
+                <div class="tag-list"><span class="tag">Header: HSTS</span></div>
+            </div>
+
+            <div class="cyber-card">
+                <h3><i class="fa-solid fa-window-maximize" style="color:var(--primary-neon); margin-right:8px;"></i> X-Frame-Options</h3>
+                <p>Protects users against Clickjacking attacks by preventing the web page from being embedded inside unauthorized <code>&lt;iframe&gt;</code> elements.</p>
+                <div class="tag-list"><span class="tag">DENY / SAMEORIGIN</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Learning Reflection -->
+    <section id="reflection">
+        <div class="reflection-box">
+            <h3><i class="fa-solid fa-graduation-cap"></i> Activity Summary & Learning Reflection</h3>
+            <p style="margin-bottom: 1rem;">
+                Through this E-Portfolio on <strong>Web Security</strong> under the course <em>Cryptography and Cyber Security</em>, I have explored the vital intersection between cryptographic primitives and real-world web application defense. Modern web security does not rely on a single barrier; instead, it operates on a <strong>Defense-in-Depth</strong> model.
+            </p>
+            <p>
+                By combining transport-layer encryption (<strong>TLS 1.3</strong>), strong password hashing (<strong>bcrypt/Argon2</strong>), secure coding practices against <strong>OWASP Top 10</strong> vulnerabilities, and strict browser security headers, developers and security engineers can build resilient web ecosystems capable of safeguarding user privacy and organizational assets against evolving cyber threats.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Designed & Curated by <strong>Sri Harshini K</strong> | Subject: <strong>Cryptography and Cyber Security</strong></p>
+        <p style="margin-top: 5px; font-size: 0.8rem;">Topic: Web Security &bull; Academic E-Portfolio Activity</p>
+    </footer>
+
+</body>
+</html>
